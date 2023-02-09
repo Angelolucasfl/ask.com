@@ -1,1 +1,18 @@
-<h1>Login</h1>
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="flex items-center justify-center">
+    <form action="{% url 'logar' %}" method="POST" class="bg-white p-4 rounded">
+        {% csrf_token %}
+        <label class="display: block text-left mr-4">Nome de Usuário:</label>
+        <input type="text" name="nome_usuario" placeholder="Seu nome de usuário" class="display: block bg-yellow-500 text-white rounded py-2 px-4 placeholder-white">
+    
+        <label class="display: block text-left mr-4">Senha:</label>
+        <input type="password" name="senha" placeholder="Sua senha" class="display: block bg-yellow-500 text-white rounded py-2 px-4 placeholder-white">
+        
+        <input type="submit" value="Login" class="display: block bg-gray-600 text-white font-bold rounded py-2 px-4 mt-4">
+    </form>
+
+</div>
+{% endblock %}
