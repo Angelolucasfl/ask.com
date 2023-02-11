@@ -4,6 +4,7 @@ from . models import User
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
+from . forms import UserForm
 
 
 def cadastrar(request):
@@ -60,7 +61,7 @@ def logar(request):
 
         if user is not None:
             login(request, user)
-            return render(request, 'users/perfil.html')
+            return redirect('/auth/perfil')
         
         else:
             messages.add_message(request, constants.ERROR, "Usuário ou senha incorretos")
@@ -69,7 +70,18 @@ def logar(request):
 
 @login_required(login_url="logar")
 def perfil(request):
-    return render(request, 'users/perfil.html')        
+    user = request.user
+    form = UserForm(instance=user)
+    context = {'form':form}  
+
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=user) 
+        if form.is_valid(): 
+            form.save()
+            return redirect('/auth/perfil')
+            
+    return render(request, 'users/perfil.html', context)
+          
 
 
 def sair(request):

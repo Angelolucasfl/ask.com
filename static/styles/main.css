@@ -1,3 +1,77 @@
-body{
-    background-color:bisque
-}
+
+  /* Defina a cor de fundo da página */
+  body {
+    background-color: #e0f2f1;
+  }
+
+  /* Estilize o formulário de registro */
+  .bg-white {
+    background-color: #fff;
+  }
+
+  .p-5 {
+    padding: 1.5rem;
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Estilize os rótulos de entrada */
+  .text-left {
+    text-align: left;
+  }
+
+  .text-gray-800 {
+    color: #2d3748;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  /* Estilize as entradas de texto */
+  .bg-yellow-500 {
+    background-color: #fec606;
+  }
+
+  .text-white {
+    color: #fff;
+  }
+
+  .rounded-full {
+    border-radius: 9999px;
+  }
+
+  .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .placeholder-white::placeholder {
+    color: #fff;
+  }
+
+  /* Estilize o botão de registro */
+  .bg-gray-600 {
+    background-color: #2d3748;
+  }
+
+  /* Estilize o link de login */
+  .text-gray-600 {
+    color: #718096;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+

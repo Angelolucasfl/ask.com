@@ -5,6 +5,7 @@
     <img src="{% static 'img/nerd.png' %}" alt="Logo" class="h-12 w-14 rounded-full overflow-hidden border-4 border-white-500">
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <div class="text-center text-3xl font-bold text-yellow-500 mb-2">Ask.com</div>
     <form class="w-full max-w-sm mx-auto">
       <div class="border-b border-gray-800 py-2 ">
         <input class="bg-gray-700 px-7 py-1 rounded-full text-white mr-2" type="text" placeholder="Pesquisar">
@@ -13,8 +14,6 @@
         </button>
       </div>
     </form>
-    
-    
     <div class="text-sm flex flex-col items-center justify-center">
       {% if request.user.is_authenticated %}
         <img src="{{request.user.avatar.url}}" alt="Usuário" class="h-12 w-12 rounded-full overflow-hidden border-4 border-yellow-500 mr-2">
@@ -24,7 +23,7 @@
       {% endif %}
     </div>
   </div>
-</nav>   
+</nav>     
 
 
 
