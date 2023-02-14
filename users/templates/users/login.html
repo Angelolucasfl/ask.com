@@ -36,7 +36,7 @@
 
 
 <div class="flex items-center justify-center mt-8" >
-    <form action="{% url 'logar' %}" method="POST" class="bg-white p-5 rounded-lg shadow-lg">
+    <form action="{% url 'cadastrar' %}" method="POST" class="bg-white p-5 rounded-lg shadow-lg">
         {% csrf_token %}
         {% if messages %}
         <br>
@@ -48,15 +48,15 @@
         {% endif %} 
 
         <label class="display: block text-left mr-4 text-gray-800 font-bold">Nome de usuário:</label>
-        <input type="text" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="Seu nome de usuário..." name="nome_usuario">
+        <input type="text" name="nome_usuario" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="Seu nome de usuário...">
         <br>
                 
         <label class="display: block text-left mr-4 text-gray-800 font-bold">Senha:</label>
-        <input type="password" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="Sua senha..." name="senha">
+        <input type="password" name="senha" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="Sua senha...">
         <br>
 
         <label class="display: block text-left mr-4 text-gray-800 font-bold">Confirmar senha:</label>
-        <input type="password" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="Sua senha novamente..." name="confirmar_senha">
+        <input type="password" name="confirmar_senha" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="Sua senha novamente...">
 
         <input type="submit" value="Registrar" class="display: block bg-gray-600 text-white font-bold rounded-full py-2 px-4 mt-8">
 

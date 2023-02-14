@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<div class="container mx-auto px-12 lg:px-18 w-6/12 mt-16">
+    <div class="bg-gray-800 py-3">
+        <div class="flex items-center justify-between mx-4">
+            <h1 class="text-gray-300 text-3xl font-bold">Pergunta</h1>
+            <div class="flex items-center">
+                <a href="{% url 'home' %}"><button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg mr-4">Voltar</button></a>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg mr-4">Editar</button>
+                <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Apagar</button>
+            </div>
+        </div>
+        <div>
+            <p class="flex items-center justify-end mx-4 pt-2 text-gray-400 text-sm float: left">{{ pergunta.criado }}</p>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6">      
+        <div class="flex items-center">
+            <img src="{{ pergunta.host.avatar.url }}" alt="{{ pergunta.usuario.nome }}" class="w-12 h-12 rounded-full">
+            <div class="ml-4">
+                <h3 class="text-gray-800 text-xl font-bold">@{{ pergunta.host }}</h3>
+            </div>
+              
+        </div>
+        <h2 class="text-gray-800 text-2xl font-bold mb-2">{{ pergunta.corpo }}</h2>
+        <p class="text-gray-600 text-xl mb-2">{{ pergunta.descricao }}</p>
+        <div class="container d-flex justify-end">
+            <span class="text-gray-800 text-base font-bold bg-gray-300 px-3 py-1 rounded-full"> {{ pergunta.topico }}</span>
+        </div>
+    </div>
+
+</div>
+
+
+<!--respostas-->
+
+
+<div class="container mx-auto px-12 lg:px-18 w-6/12">
+    <div class="bg-white rounded-lg shadow-lg p-6 mt-16 ">
+        <div class="mb-4"> 
+            <div class="flex justify-end float: right">
+                <button class="text-gray-800 text-sm font-bold bg-blue-500 px-3 py-1 rounded-full mr-4 hover:bg-blue-400">Curtir</button>
+            </div>
+            <div class="flex">
+                <img src="{{resposta.usuario.avatar.url}}" alt="Foto do usuário" class="w-12 h-12 rounded-full mr-4">
+                <div class="mt-2">
+                    <h3 class="text-gray-800 text-xl font-bold">@{{resposta.usuario}}</h3>
+                </div>
+            </div>
+    
+            <p class="text-gray-600 text-lg mb-2 mt-6">{{resposta.corpo}}</p>
+    
+            <hr>
+            <div class="flex justify-end mb-4">
+                <button class="text-gray-800 text-sm font-bold bg-blue-500 px-3 py-1 rounded-full hover:bg-blue-400 mt-2">Responder</button>
+            </div>
+        </div>
+    </div>
+</div>      
+
+{% endblock %}

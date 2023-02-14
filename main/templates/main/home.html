@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<div class="container mx-auto px-12 lg:px-18 w-5/12">
+  <h1 class="text-gray-800 text-3xl font-bold mb-2 mt-16">Suas Perguntas</h1>
+  {% for pergunta in pergunta %}
+    {% if pergunta.host == request.user %}
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex items-center mb-4">
+          <img src="{{ pergunta.host.avatar.url }}" alt="{{ pergunta.usuario.nome }}" class="w-12 h-12 rounded-full">
+          <div class="ml-4">
+            <h3 class="text-gray-800 text-lg font-bold"> <a href="{% url 'perfil' %}">@{{ pergunta.host }}</h3></a>
+            <p class="text-gray-600 text-sm">{{ pergunta.criado }}</p>
+          </div>
+        </div>
+        <h2 class="text-gray-800 text-xl font-bold mb-2"><a href="{% url 'pergunta' pergunta.id %}">{{ pergunta.corpo }}</h2></a>
+        <div class="border-t border-gray-600 mt-2 pt-2">
+          <p class="text-gray-600 text-sm mr-2">{{ pergunta.topicos.count }} respostas</p>
+          <p class="text-gray-600 text-sm">{{ pergunta.topico_id.first }}</p>
+        </div>
+      </div>
+    {% endif %}  
+  {% endfor %}
+</div>
+{% endblock %}
