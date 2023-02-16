@@ -1,27 +1,56 @@
 {% extends 'main.html' %}
+{% load static %}
 
 
 {% block content %}
+<div class="home-container">
+  <div class="px-12 lg:px-18 w-1/5 ml-2 mt-6">
+    <h2 class="font-bold text-lg mb-4">Tópicos</h2>
+    <ul class="list-disc pl-4">
+      <li><a href="{% url 'home' %}">Todos</a></li>
+      {% for pergunta in pergunta %}
+        <li><a href="{% url 'home' %}?q={{pergunta.topico}}">{{ pergunta.topico }}</a></li>
+      {% endfor %}
+    </ul>
+    {% if topicos.count > 8 %}
+      <a href="{% url 'todos_topicos' %}" class="text-blue-500 font-bold hover:underline">Ver Todos</a>
+    {% endif %}
+  </div>
 
-<div class="container mx-auto px-12 lg:px-18 w-5/12">
-  <h1 class="text-gray-800 text-3xl font-bold mb-2 mt-16">Suas Perguntas</h1>
-  {% for pergunta in pergunta %}
-    {% if pergunta.host == request.user %}
-      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-        <div class="flex items-center mb-4">
-          <img src="{{ pergunta.host.avatar.url }}" alt="{{ pergunta.usuario.nome }}" class="w-12 h-12 rounded-full">
-          <div class="ml-4">
-            <h3 class="text-gray-800 text-lg font-bold"> <a href="{% url 'perfil' %}">@{{ pergunta.host }}</h3></a>
-            <p class="text-gray-600 text-sm">{{ pergunta.criado }}</p>
+
+  <div class="container mx-auto px-12 lg:px-18 w-3/5">
+      <h1 class="text-gray-800 text-3xl font-bold mb-2 mt-16">Suas Perguntas</h1>
+    {% for pergunta in pergunta %}
+      {% if pergunta.host == request.user %}
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex items-center mb-4">
+            <img src="{{ pergunta.host.avatar.url }}" alt="{{ pergunta.usuario.nome }}" class="w-12 h-12 rounded-full">
+            <div class="ml-4">
+              <h3 class="text-gray-800 text-lg font-bold"> <a href="{% url 'perfil' %}">@{{ pergunta.host }}</h3></a>
+              <p class="text-gray-600 text-sm">{{ pergunta.criado }}</p>
+            </div>
+          </div>
+          <h2 class="text-gray-800 text-xl font-bold mb-2"><a href="{% url 'pergunta' pergunta.id %}">{{ pergunta.corpo }}</h2></a>
+          <div class="border-t border-gray-400 mt-2 pt-2">
           </div>
         </div>
-        <h2 class="text-gray-800 text-xl font-bold mb-2"><a href="{% url 'pergunta' pergunta.id %}">{{ pergunta.corpo }}</h2></a>
-        <div class="border-t border-gray-600 mt-2 pt-2">
-          <p class="text-gray-600 text-sm mr-2">{{ pergunta.topicos.count }} respostas</p>
-          <p class="text-gray-600 text-sm">{{ pergunta.topico_id.first }}</p>
-        </div>
-      </div>
-    {% endif %}  
-  {% endfor %}
+      {% endif %}  
+    {% endfor %}
+  </div>
+
+  <div class="px-12 lg:px-18 w-1/5 ml-16 mt-6">
+    <h2 class="font-bold text-lg mb-4">Feed de Perguntas</h2>
+    <ul class="list-disc pl-4">
+      {% for pergunta in pergunta %}
+        <li><a href="{% url 'pergunta' pergunta.id %}">{{ pergunta.corpo }}</a></li>
+      {% endfor %}
+    </ul>
+    {% if perguntas.count > 8 %}
+      <a href="{% url 'perguntas_recentes' %}" class="text-blue-500 font-bold hover:underline">Ver Todas</a>
+    {% endif %}
+  </div>
+  
+
 </div>
+
 {% endblock %}

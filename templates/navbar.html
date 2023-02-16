@@ -2,13 +2,13 @@
 
 <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-4">
   <div class="flex items-center flex-shrink-0 text-gray-800 mr-2">
-    <img src="{% static 'img/nerd.png' %}" alt="Logo" class="h-12 w-14 rounded-full overflow-hidden border-4 border-white-500">
+    <a href="{% url 'home' %}"><img src="{% static 'img/nerd.png' %}" alt="Logo" class="h-12 w-14 rounded-full overflow-hidden border-4 border-white-500"></a>
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-center text-3xl font-bold text-yellow-600 mb-2">Ask.com</div>
-    <form class="w-full max-w-sm mx-auto">
+    <a href="{% url 'home' %}"><div class="text-center text-3xl font-bold text-yellow-600 mb-2">Ask.com</div></a>
+    <form method="GET" action="{% url 'home' %}" class="w-full max-w-sm mx-auto">
       <div class="border-b border-gray-800 py-2 ">
-        <input class="bg-gray-700 px-7 py-1 rounded-full text-white mr-2" type="text" placeholder="Pesquisar">
+          <input class="bg-gray-700 px-7 py-1 rounded-full text-white mr-2" type="text" name="q" placeholder="Pesquisar">
         <button class="bg-yellow-600 py-1 px-3 rounded-full text-white">
           Buscar
         </button>
@@ -16,7 +16,7 @@
     </form>
     <div class="text-sm flex flex-col items-center justify-center">
       {% if request.user.is_authenticated %}
-        <img src="{{request.user.avatar.url}}" alt="Usuário" class="h-14 w-14 rounded-full overflow-hidden border-4 border-yellow-500 mr-2">
+        <a href="{% url 'perfil' %}"><img src="{{request.user.avatar.url}}" alt="Usuário" class="h-14 w-14 rounded-full overflow-hidden border-4 border-yellow-500 mr-2"></a>
         <a href="{% url 'sair' %}" class="mt-2 bg-yellow-600 py-1 px-2.5 rounded-full text-white">Logout</a>
       {% else %}
         <a href="{% url 'logar' %}" class="mt-2 bg-yellow-600 py-1 px-2.5 rounded-full text-white">Login</a>

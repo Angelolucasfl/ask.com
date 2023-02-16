@@ -30,4 +30,3 @@ class Resposta(models.Model):
 
     def __str__(self):
         return self.corpo[0:50]
-

@@ -40,26 +40,26 @@
 
 
 <div class="container mx-auto px-12 lg:px-18 w-6/12">
-    <div class="bg-white rounded-lg shadow-lg p-6 mt-16 ">
-        <div class="mb-4"> 
-            <div class="flex justify-end float: right">
-                <button class="text-gray-800 text-sm font-bold bg-blue-500 px-3 py-1 rounded-full mr-4 hover:bg-blue-400">Curtir</button>
-            </div>
-            <div class="flex">
-                <img src="{{resposta.usuario.avatar.url}}" alt="Foto do usuário" class="w-12 h-12 rounded-full mr-4">
-                <div class="mt-2">
-                    <h3 class="text-gray-800 text-xl font-bold">@{{resposta.usuario}}</h3>
+    <div class="bg-white rounded-lg shadow-lg p-6 mt-16">
+        {% for resposta in resposta %}
+            <div class="mb-8"> 
+                <div class="flex">
+                    <img src="{{resposta.usuario.avatar.url}}" alt="Foto do usuário" class="w-12 h-12 rounded-full mr-4">
+                    <div class="mt-2">
+                        <h3 class="text-gray-800 text-xl font-bold">@{{resposta.usuario}}</h3>
+                    </div>
                 </div>
+                <div class="flex justify-end px-2">
+
+
+                    
+                </div>
+                <p class="text-gray-700 text-lg">{{resposta.corpo}}</p>
+                <hr class="my-6">
             </div>
-    
-            <p class="text-gray-600 text-lg mb-2 mt-6">{{resposta.corpo}}</p>
-    
-            <hr>
-            <div class="flex justify-end mb-4">
-                <button class="text-gray-800 text-sm font-bold bg-blue-500 px-3 py-1 rounded-full hover:bg-blue-400 mt-2">Responder</button>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-</div>      
+</div>
+     
 
 {% endblock %}
