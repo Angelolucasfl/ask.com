@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from . models import User
+from main.models import Pergunta
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
@@ -83,7 +84,13 @@ def perfil(request):
     return render(request, 'users/perfil.html', context)
           
 
-
 def sair(request):
     logout(request)
     return redirect('/auth/login')
+
+
+def perfil_usuario(request, id):
+    user = User.objects.get(id=id)
+    perguntas = user.pergunta_set.all()
+    context = {'user':user, 'perguntas':perguntas}
+    return render(request, 'users/perfil_usuario.html', context)

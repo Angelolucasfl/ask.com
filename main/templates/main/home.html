@@ -19,14 +19,14 @@
 
 
   <div class="container mx-auto px-12 lg:px-18 w-3/5">
-      <h1 class="text-gray-800 text-3xl font-bold mb-2 mt-16">Suas Perguntas</h1>
+      <h1 class="text-gray-800 text-2xl font-bold mb-2 mt-16">Suas Perguntas</h1>
     {% for pergunta in pergunta %}
       {% if pergunta.host == request.user %}
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
           <div class="flex items-center mb-4">
             <img src="{{ pergunta.host.avatar.url }}" alt="{{ pergunta.usuario.nome }}" class="w-12 h-12 rounded-full">
             <div class="ml-4">
-              <h3 class="text-gray-800 text-lg font-bold"> <a href="{% url 'perfil' %}">@{{ pergunta.host }}</h3></a>
+              <h3 class="text-gray-800 text-lg font-bold"> <a href="{% url 'perfil_usuario' pergunta.host.id %}">@{{ pergunta.host }}</h3></a>
               <p class="text-gray-600 text-sm">{{ pergunta.criado }}</p>
             </div>
           </div>

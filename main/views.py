@@ -24,4 +24,3 @@ def pergunta(request, id):
     if request.method == 'GET':
         return render(request, 'main/pergunta.html', context)
             
-        
