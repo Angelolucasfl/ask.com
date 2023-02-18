@@ -33,10 +33,12 @@ def cadastrar(request):
         try:
             user = User.objects.create_user(
                 username=nome_usuario,
+                nome_usuario=nome_usuario,
+                bio='',
                 password=senha,
             )
             messages.add_message(request, constants.SUCCESS, "Cadastro realizado com sucesso!")
-            return redirect('/auth/perfil')
+            return redirect('/')
         
         except:
             messages.add_message(request, constants.ERROR, 'Erro ao tentar cadastrar')
@@ -47,7 +49,7 @@ def cadastrar(request):
 def logar(request):
 
     if request.user.is_authenticated:
-        return redirect('/auth/perfil')
+        return redirect('/')
 
     page = 'login'
     context = {'page':page}
@@ -62,7 +64,7 @@ def logar(request):
 
         if user is not None:
             login(request, user)
-            return redirect('/auth/perfil')
+            return redirect('/')
         
         else:
             messages.add_message(request, constants.ERROR, "Usuário ou senha incorretos")
@@ -91,6 +93,7 @@ def sair(request):
 
 def perfil_usuario(request, id):
     user = User.objects.get(id=id)
-    perguntas = user.pergunta_set.all()
+    perguntas = Pergunta.objects.filter(host_id=id)
     context = {'user':user, 'perguntas':perguntas}
+    
     return render(request, 'users/perfil_usuario.html', context)

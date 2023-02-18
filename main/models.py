@@ -7,18 +7,22 @@ class Topico(models.Model):
 
     def __str__(self):
         return self.nome
+    
 
 
 class Pergunta(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     topico = models.ForeignKey(Topico, on_delete=models.SET_NULL, null=True)
-    corpo = models.CharField(max_length=500)
+    corpo = models.CharField(max_length=600)
     descricao = models.TextField(null=True, blank=True)
     criado = models.DateTimeField(auto_now_add=True)
     editado = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.corpo
+    
+    class Meta:
+        ordering = ['-criado', '-editado']
 
 
 class Resposta(models.Model):
@@ -28,5 +32,9 @@ class Resposta(models.Model):
     criado = models.DateTimeField(auto_now_add=True)
     editado = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return self.corpo[0:50]
+    
+    class Meta:
+        ordering = ['-criado', '-editado']

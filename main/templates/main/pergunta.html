@@ -8,13 +8,15 @@
         <div class="flex items-center justify-between mx-4">
             <h1 class="text-gray-300 text-3xl font-bold">Pergunta</h1>
             <div class="flex items-center">
-                <a href="{% url 'home' %}"><button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg mr-4">Voltar</button></a>
-                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg mr-4">Editar</button>
-                <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Apagar</button>
+                {% if pergunta.host == request.user %}
+                    <a href="{% url 'editar_pergunta' pergunta.id %}"><button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg mr-4">Editar</button></a>
+                    <a href="{% url 'deletar' pergunta.id %}"><button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Deletar</button></a>
+                {% endif %}
+                <a href="{% url 'home' %}"><button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg ml-4">Voltar</button></a>
             </div>
         </div>
         <div>
-            <p class="flex items-center justify-end mx-4 pt-2 text-gray-400 text-sm float: left">{{ pergunta.criado }}</p>
+            <p class="flex items-center justify-end mx-4 pt-2 text-gray-400 text-sm float: left">{{ pergunta.criado|timesince }} ago</p>
         </div>
     </div>
 
@@ -22,11 +24,11 @@
         <div class="flex items-center">
             <img src="{{ pergunta.host.avatar.url }}" alt="{{ pergunta.usuario.nome }}" class="w-12 h-12 rounded-full">
             <div class="ml-4">
-                <h3 class="text-gray-800 text-xl font-bold">@{{ pergunta.host }}</h3>
+                <a href="{% url 'perfil_usuario' pergunta.host.id %}"><h3 class="text-gray-800 text-xl font-bold">@{{ pergunta.host }}</h3></a>
             </div>
               
         </div>
-        <h2 class="text-gray-800 text-2xl font-bold mb-2">{{ pergunta.corpo }}</h2>
+        <h2 class="text-gray-800 text-2xl font-bold mt-4">{{ pergunta.corpo }}</h2>
         <p class="text-gray-600 text-xl mb-2">{{ pergunta.descricao }}</p>
         <div class="container d-flex justify-end">
             <span class="text-gray-800 text-base font-bold bg-gray-300 px-3 py-1 rounded-full"> {{ pergunta.topico }}</span>
@@ -42,24 +44,42 @@
 <div class="container mx-auto px-12 lg:px-18 w-6/12">
     <div class="bg-white rounded-lg shadow-lg p-6 mt-16">
         {% for resposta in resposta %}
-            <div class="mb-8"> 
-                <div class="flex">
-                    <img src="{{resposta.usuario.avatar.url}}" alt="Foto do usuário" class="w-12 h-12 rounded-full mr-4">
-                    <div class="mt-2">
-                        <h3 class="text-gray-800 text-xl font-bold">@{{resposta.usuario}}</h3>
-                    </div>
-                </div>
-                <div class="flex justify-end px-2">
+        <div class="flex">
+            <img src="{{resposta.usuario.avatar.url}}" alt="Foto do usuário" class="w-12 h-12 rounded-full mr-4 mt-3">
+            <div class="flex-grow">
+                <a href="{% url 'perfil_usuario' resposta.usuario.id %}"><h3 class="text-gray-500 text-lg font-bold mt-3">@{{resposta.usuario}}</h3></a>
 
-
-                    
+                <div>
+                    <p class="text-gray-700 text-xl font-medium mt-2">{{ resposta.corpo }}</p>
                 </div>
-                <p class="text-gray-700 text-lg">{{resposta.corpo}}</p>
-                <hr class="my-6">
+
+                <div>
+                    <p class="justify-start pt-2 text-gray-400 text-sm float: left ">{{ resposta.criado|timesince }} ago</p>
+                </div>
             </div>
+            
+            <div class="ml-auto mt-3">
+                <a href="{% url 'deletar_resposta' resposta.usuario.id %}"><button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Deletar</button></a> 
+            </div>
+        </div>
+        <br>
+        <hr>
+        
         {% endfor %}
+
+        {% if request.user.is_authenticated %}
+            <form method="POST" action="" class="mt-8">
+                {% csrf_token %}
+                {% if pergunta.host != request.user %}
+                    <textarea name="resposta" class="block w-full border border-gray-300 rounded-lg py-2 px-4 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Digite sua resposta aqui"></textarea>
+                    <div class="mt-4 flex justify-end">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Responder</button>
+                    </div>
+                {% endif %}
+            </form>
+        {% endif %}
     </div>
 </div>
-     
+
 
 {% endblock %}

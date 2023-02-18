@@ -24,7 +24,7 @@
                 {% if campo.name == 'avatar' %}
                     <input type="file" accept="image/*" name="{{campo.name}}" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="Selecione uma imagem">
                 {% else %}
-                    <input value="{{campo.value}}" type="{{campo.type}}" name="{{campo.name}}" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="{{campo.label}}">
+                    <input value="{{campo.value}}"  type="{{campo.type}}" name="{{campo.name}}" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200">
                 {% endif %}
             </div>
         {% endfor %}

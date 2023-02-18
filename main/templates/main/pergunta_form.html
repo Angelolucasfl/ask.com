@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="flex items-center justify-center mt-8">
+    {% if messages %}
+    <br>
+    {% for message in messages %}
+        <div class="alert {{message.tags}} text-center">
+            {{message}}
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    <form action="" method="POST" class="bg-white p-5 rounded-lg shadow-lg">
+        {% csrf_token %}
+        <div class="display: flex text-right mr-4 ">
+            <a href="{% url 'home' %}"><img src="{% static 'img/arrow-left.svg' %}">Voltar</a>
+        </div> 
+            <div class="mb-4">
+                <label class="text-gray-800 font-bold mt-4"> Tópico da Pergunta </label>
+                <input required type="text" value="{{pergunta.topico.nome}}" name="topico" list="topico-list" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="{{campo.label}}">
+                <datalist id="topico-list">
+                    <select id="pergunta_topico">
+                        {% for topico in topicos %}
+                            <option value="{{topico.nome}}">{{topico.nome}}</option>
+                        {% endfor %}
+                    </select>
+                </datalist>
+
+                <label class="text-gray-800 font-bold mt-4"> Título da Pergunta </label>
+                <input required type="text" value="{{pergunta.corpo}}" name="corpo" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="{{campo.label}}">
+
+                <label class="text-gray-800 font-bold mt-4"> Descrição da Pergunta </label>
+                <input type="text" value="{{pergunta.descricao}}" name="descricao" class="block w-full border border-gray-400 rounded py-2 px-4 bg-yellow-500 focus:outline-none focus:bg-gray-200" placeholder="{{campo.label}}">
+            </div>
+
+        <input type="submit" value="Salvar" class="display: block bg-gray-600 text-white font-bold rounded-full py-2 px-4 mt-8">
+    </form>
+</div>
+
+{% endblock content %}
