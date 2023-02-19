@@ -12,7 +12,7 @@
                     <a href="{% url 'editar_pergunta' pergunta.id %}"><button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg mr-4">Editar</button></a>
                     <a href="{% url 'deletar' pergunta.id %}"><button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Deletar</button></a>
                 {% endif %}
-                <a href="{% url 'home' %}"><button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg ml-4">Voltar</button></a>
+                <a href="{{request.META.HTTP_REFERER}}"><button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg ml-4">Voltar</button></a>
             </div>
         </div>
         <div>
@@ -58,9 +58,11 @@
                 </div>
             </div>
             
-            <div class="ml-auto mt-3">
-                <a href="{% url 'deletar_resposta' resposta.usuario.id %}"><button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Deletar</button></a> 
-            </div>
+            {% if request.user == resposta.usuario %}
+                <div class="ml-auto mt-3">
+                    <a href="{% url 'deletar_resposta' resposta.usuario.id %}"><button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Deletar</button></a> 
+                </div>
+            {% endif %}
         </div>
         <br>
         <hr>

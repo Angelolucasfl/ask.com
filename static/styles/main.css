@@ -1,10 +1,9 @@
 
-  /* Defina a cor de fundo da página */
+
   body {
     background-color: #e0f2f1;
   }
 
-  /* Estilize o formulário de registro */
   .bg-white {
     background-color: #fff;
   }
@@ -21,7 +20,6 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 
-  /* Estilize os rótulos de entrada */
   .text-left {
     text-align: left;
   }
@@ -34,7 +32,7 @@
     font-weight: 700;
   }
 
-  /* Estilize as entradas de texto */
+
   .bg-yellow-500 {
     background-color: #fec606;
   }
@@ -61,12 +59,10 @@
     color: #fff;
   }
 
-  /* Estilize o botão de registro */
   .bg-gray-600 {
     background-color: #2d3748;
   }
 
-  /* Estilize o link de login */
   .text-gray-600 {
     color: #718096;
   }
@@ -75,3 +71,7 @@
     font-weight: 500;
   }
 
+  .custom-class {
+    width: 40%;
+    margin: 0 auto;
+}

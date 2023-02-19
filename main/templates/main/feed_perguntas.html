@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mx-auto py-4">
+    <div class="w-full max-w-md mx-auto mb-8 flex items-center justify-between">
+        <div class="flex items-center border-b border-b-2 border-teal-500 py-2 bg-gray-100 search-box">
+          <a href="{% url 'home' %}" class="flex items-center text-gray-700 ml-2">
+            <img src="{% static 'img/arrow-left.svg' %}" class="w-4 h-4 mr-2">
+            Voltar
+          </a>
+          <form method="GET" action="{% url 'feed_perguntas' %}">
+            <input class="appearance-none bg-transparent border-none w-full text-gray-800 mr-2 py-1 px-16 leading-tight focus:outline-none" type="text" name="q" placeholder="Pesquisar Perguntas...">
+            <a href="{% url 'feed_perguntas' %}?q={{procura}}"></a>
+          </form>
+        </div>
+      </div>
+      
+    
+    <div class="grid grid-cols-3 gap-4">
+
+        <div class="bg-white p-4 shadow rounded-lg">
+            <a href="{% url 'feed_perguntas' %}"><h2 class="text-lg font-bold text-gray-800 hover:text-blue-400 mb-4">Todos</h2></a>
+        </div>
+
+        {% for pergunta in procura %}
+            <div class="bg-white p-4 shadow rounded-lg">
+
+                <div class="flex items-center mb-4">
+                    <img src="{{ pergunta.host.avatar.url }}" alt="{{ pergunta.usuario.nome }}" class="w-12 h-12 rounded-full">
+                    <div class="ml-4">
+                      <h3 class="text-gray-800 text-lg font-bold"> <a href="{% url 'perfil_usuario' pergunta.host.id %}">@{{ pergunta.host }}</h3></a>
+                      <p class="text-gray-600 text-sm">{{ pergunta.criado|timesince }} ago</p>
+                    </div>
+                  </div>
+
+                  <a href="{% url 'pergunta' pergunta.id %}"><h2 class="text-xl font-bold text-gray-800 hover:text-blue-400 mb-4 ml-4">{{pergunta.corpo}}</h2></a>
+
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}

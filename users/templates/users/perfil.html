@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="flex items-center justify-center mt-8">
-    <form action="" method="POST" enctype="multipart/form-data" class="bg-white p-5 rounded-lg shadow-lg">
+    <form action="" method="POST" enctype="multipart/form-data" class="bg-white p-5 rounded-lg shadow-lg custom-class">
         {% csrf_token %}
         {% if messages %}
         <br>
@@ -16,6 +16,7 @@
         {% endif %} 
         <div class="display: flex text-right mr-4 ">
             <a href="{% url 'home' %}"><img src="{% static 'img/arrow-left.svg' %}">Voltar</a>
+            <h2 class="flex items-center mx-auto text-2xl font-bold">Editar Perfil</h2>
         </div>
 
         {% for campo in form %}

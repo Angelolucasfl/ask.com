@@ -7,15 +7,18 @@
   <div class="px-12 lg:px-18 w-1/5 ml-2 mt-6">
     <h2 class="font-bold text-lg mb-4">Tópicos</h2>
     <ul class="list-disc pl-4">
-      <li><a href="{% url 'home' %}">Todos</a></li>
       {% for topico in topicos %}
         <li><a href="{% url 'home' %}?q={{topico.nome}}">{{ topico.nome }}</a></li>
       {% endfor %}
     </ul>
+  
     {% if topicos.count > 8 %}
-      <a href="" class="text-blue-500 font-bold hover:underline">Ver Todos</a>
+      <a href="{% url 'topicos' %}" class="text-blue-500 font-bold hover:underline">Ver Todos</a>
     {% endif %}
   </div>
+  
+  
+  
 
 
   <div class="container mx-auto px-8 lg:px-18 w-4/5">
@@ -49,15 +52,13 @@
   <div class="px-12 lg:px-18 w-1/5 ml-16 mt-6">
     <h2 class="font-bold text-lg mb-4">Feed de Perguntas</h2>
     <ul class="list-disc pl-4">
-      {% for pergunta in pergunta %}
+      {% for pergunta in pergunta%}
         {% if pergunta.host != request.user %}
           <li><a href="{% url 'pergunta' pergunta.id %}">{{ pergunta.corpo }}</a></li>
         {% endif %}
       {% endfor %}
     </ul>
-    {% if perguntas.count > 8 %}
-      <a href="{% url 'perguntas_recentes' %}" class="text-blue-500 font-bold hover:underline">Ver Todas</a>
-    {% endif %}
+      <a href="{% url 'feed_perguntas' %}" class="text-blue-500 font-bold hover:underline">Ver Todas</a>
   </div>
   
 

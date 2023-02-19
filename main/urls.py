@@ -10,5 +10,7 @@ urlpatterns = [
     path('pergunta/deletar_pergunta/<str:id>/', views.deletar, name='deletar'),
 
     path('pergunta/deletar_resposta/<str:id>/', views.deletar_resposta, name='deletar_resposta'),
+
     path('pergunta/topicos', views.topicos, name='topicos'),
+    path('pergunta/feed_perguntas', views.feed_perguntas, name='feed_perguntas'),
 ]

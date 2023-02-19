@@ -38,7 +38,7 @@ def cadastrar(request):
                 password=senha,
             )
             messages.add_message(request, constants.SUCCESS, "Cadastro realizado com sucesso!")
-            return redirect('/')
+            return redirect('users/login.html')
         
         except:
             messages.add_message(request, constants.ERROR, 'Erro ao tentar cadastrar')
@@ -86,6 +86,7 @@ def perfil(request):
     return render(request, 'users/perfil.html', context)
           
 
+@login_required(login_url="logar")
 def sair(request):
     logout(request)
     return redirect('/auth/login')
