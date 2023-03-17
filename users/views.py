@@ -38,7 +38,7 @@ def cadastrar(request):
                 password=senha,
             )
             messages.add_message(request, constants.SUCCESS, "Cadastro realizado com sucesso!")
-            return redirect('users/login.html')
+            return redirect('logar')
         
         except:
             messages.add_message(request, constants.ERROR, 'Erro ao tentar cadastrar')
